@@ -472,7 +472,7 @@ OPTION(OSG_USE_FLOAT_QUAT "Set to ON to build OpenSceneGraph with float Quat ins
 MARK_AS_ADVANCED(OSG_USE_FLOAT_QUAT)
 
 IF (WIN32)
-    OPTION(OSG_USE_UTF8_FILENAME "Set to ON to use a UTF8 locale for filenames instead of the default locale." OFF)
+    OPTION(OSG_USE_UTF8_FILENAME "Set to ON to use a UTF8 locale for filenames instead of the default locale." ON)
     MARK_AS_ADVANCED(OSG_USE_UTF8_FILENAME)
 ENDIF()
 
