@@ -957,7 +957,8 @@ osgDB::ReaderWriter::ReadResult ReaderWriterOBJ::readNode(const std::string& fil
 
         obj::Model model;
         model.setDatabasePath(osgDB::getFilePath(fileName.c_str()));
-        model.readOBJ(fin, local_opt.get());
+        //model.readOBJ(fin, local_opt.get());
+        model.readOBJAssimp(fin, local_opt.get());
 
         ObjOptionsStruct localOptions = parseOptions(options);
 
@@ -973,7 +974,8 @@ osgDB::ReaderWriter::ReadResult ReaderWriterOBJ::readNode(std::istream& fin, con
     if (fin)
     {
         obj::Model model;
-        model.readOBJ(fin, options);
+        //model.readOBJ(fin, options);
+        model.readOBJAssimp(fin, options);
 
         ObjOptionsStruct localOptions = parseOptions(options);
 

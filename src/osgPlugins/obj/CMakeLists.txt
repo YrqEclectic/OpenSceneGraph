@@ -7,6 +7,8 @@ SET(TARGET_SRC
 SET(TARGET_H
     OBJWriterNodeVisitor.h
     obj.h
+	fast_atof.h
+	objTools.h
 )
 #### end var setup  ###
 SETUP_PLUGIN(obj)

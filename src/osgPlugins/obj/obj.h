@@ -197,6 +197,7 @@ public:
     std::string lastComponent(const char* linep);
     bool readMTL(std::istream& fin);
     bool readOBJ(std::istream& fin, const osgDB::ReaderWriter::Options* options);
+    void readOBJAssimp(std::istream& fin, const osgDB::ReaderWriter::Options* options);
 
     bool readline(std::istream& fin, char* line, const int LINE_SIZE);
     void addElement(Element* element);
