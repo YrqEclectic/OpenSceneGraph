@@ -123,10 +123,9 @@ class OSGUTIL_EXPORT Tessellator : public osg::Referenced
          * tessellation can introduce extra vertices for concave or crossing boundaries,
          * these will leak memory if not removed when retessellating. */
         void reduceArray(osg::Array * cold, const unsigned int nnu);
-
-        void collectTessellation(osg::Geometry &cxgeom, unsigned int originalIndex);
-
         typedef std::map<osg::Vec3*,unsigned int> VertexPtrToIndexMap;
+        void collectTessellation(osg::Geometry &cxgeom, unsigned int originalIndex,VertexPtrToIndexMap& vertexPtrToIndexMap);
+
         void addContour(GLenum  mode, unsigned int first, unsigned int last, osg::Vec3Array* vertices);
         void addContour(osg::PrimitiveSet* primitive, osg::Vec3Array* vertices);
         void handleNewVertices(osg::Geometry& geom,VertexPtrToIndexMap &vertexPtrToIndexMap);
@@ -244,6 +243,9 @@ class OSGUTIL_EXPORT Tessellator : public osg::Referenced
 
         /** count of number of extra primitives added */
         unsigned int _extraPrimitives;
+
+        /** check if geom vertex data changed */
+        bool _geomVertChanged;
 };
 
 }
