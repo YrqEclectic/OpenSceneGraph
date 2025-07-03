@@ -321,13 +321,13 @@ struct FindSharpEdgesFunctor
 
     void operator() (unsigned int p1, unsigned int p2, unsigned int p3)
     {
-        osg::Vec3 normal( computeNormal(p1, p2, p3) );
-
         if (p1==p2 || p2==p3 || p1==p3)
         {
             // OSG_NOTICE<<"NULL triangle ("<<p1<<", "<<p2<<", "<<p3<<")"<<std::endl;
             return;
         }
+
+        osg::Vec3 normal(computeNormal(p1, p2, p3));
 
         Triangle* tri = new Triangle(_currentPrimitiveSetIndex, p1, p2, p3);
         _triangles.push_back(tri);

@@ -598,7 +598,7 @@ osg::Geometry* ReaderWriterOBJ::convertElementListToGeometry(obj::Model& model, 
         }
 
         osg::DrawArrays* drawArrays = new osg::DrawArrays(GL_POINTS,startPos,numPoints);
-        geometry->addPrimitiveSet(drawArrays);
+        geometry->getPrimitiveSetList().push_back(drawArrays);
     }
 
     if (numPolylineElements>0)
@@ -648,7 +648,7 @@ osg::Geometry* ReaderWriterOBJ::convertElementListToGeometry(obj::Model& model, 
             }
         }
 
-        geometry->addPrimitiveSet(drawArrayLengths);
+        geometry->getPrimitiveSetList().push_back(drawArrayLengths);
 
     }
 
@@ -660,7 +660,7 @@ osg::Geometry* ReaderWriterOBJ::convertElementListToGeometry(obj::Model& model, 
 
         #ifdef USE_DRAWARRAYLENGTHS
             osg::DrawArrayLengths* drawArrayLengths = new osg::DrawArrayLengths(GL_POLYGON,startPos);
-            geometry->addPrimitiveSet(drawArrayLengths);
+            geometry->getPrimitiveSetList().push_back(drawArrayLengths);
         #endif
 
         for(itr=elementList.begin();
@@ -677,13 +677,13 @@ osg::Geometry* ReaderWriterOBJ::convertElementListToGeometry(obj::Model& model, 
                     {
                         osg::DrawArrays* drawArrays = new osg::DrawArrays(GL_POLYGON,startPos,element.vertexIndices.size());
                         startPos += element.vertexIndices.size();
-                        geometry->addPrimitiveSet(drawArrays);
+                        geometry->getPrimitiveSetList().push_back(drawArrays);
                     }
                     else
                     {
                         osg::DrawArrays* drawArrays = new osg::DrawArrays(GL_TRIANGLE_FAN,startPos,element.vertexIndices.size());
                         startPos += element.vertexIndices.size();
-                        geometry->addPrimitiveSet(drawArrays);
+                        geometry->getPrimitiveSetList().push_back(drawArrays);
                     }
                 #endif
 
@@ -812,7 +812,7 @@ osg::Node* ReaderWriterOBJ::convertModelToSceneGraph(obj::Model& model, ObjOptio
             }
 
             // tri strip polygons to improve graphics performance
-            if (!localOptions.noTriStripPolygons)
+            //if (!localOptions.noTriStripPolygons)
             {
                 osgUtil::optimizeMesh(geometry);
             }

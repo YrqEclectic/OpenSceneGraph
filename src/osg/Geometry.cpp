@@ -582,17 +582,26 @@ osg::VertexBufferObject* Geometry::getOrCreateVertexBufferObject()
 
 osg::ElementBufferObject* Geometry::getOrCreateElementBufferObject()
 {
-    DrawElementsList drawElementsList;
-    getDrawElementsList(drawElementsList);
-
-    DrawElementsList::iterator deitr;
-    for(deitr = drawElementsList.begin();
-        deitr != drawElementsList.end();
-        ++deitr)
+    for (PrimitiveSetList::const_iterator itr = _primitives.begin();
+        itr != _primitives.end();
+        ++itr)
     {
-        osg::DrawElements* elements = *deitr;
-        if (elements->getElementBufferObject()) return elements->getElementBufferObject();
+        osg::DrawElements* de = (*itr)->getDrawElements();
+        if (de&& de->getElementBufferObject()) return de->getElementBufferObject();
     }
+
+
+    //DrawElementsList drawElementsList;
+    //getDrawElementsList(drawElementsList);
+
+    //DrawElementsList::iterator deitr;
+    //for(deitr = drawElementsList.begin();
+    //    deitr != drawElementsList.end();
+    //    ++deitr)
+    //{
+    //    osg::DrawElements* elements = *deitr;
+    //    if (elements->getElementBufferObject()) return elements->getElementBufferObject();
+    //}
 
     return new osg::ElementBufferObject;
 }
